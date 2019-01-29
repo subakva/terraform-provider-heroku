@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform/helper/acctest"
 	"github.com/hashicorp/terraform/helper/resource"
 	"github.com/hashicorp/terraform/terraform"
-	"github.com/heroku/heroku-go/v3"
+	heroku "github.com/heroku/heroku-go/v3"
 )
 
 func TestAccHerokuApp_Basic(t *testing.T) {
@@ -687,7 +687,7 @@ resource "heroku_app" "foobar" {
   stack = "%s"
   region = "us"
 
-  config_vars {
+  config_vars = {
     FOO = "bar"
   }
 }`, appName, appStack)
@@ -723,7 +723,7 @@ resource "heroku_app" "foobar" {
 	stack  = "%s"
   region = "us"
 
-  config_vars {
+  config_vars = {
     FOO = "bing"
     BAZ = "bar"
   }
@@ -750,7 +750,7 @@ resource "heroku_app" "foobar" {
     name = "%s"
   }
 
-  config_vars {
+  config_vars = {
     FOO = "bar"
   }
 }`, appName, org)
@@ -772,7 +772,7 @@ resource "heroku_app" "foobar" {
     name = "%s"
   }
 
-  config_vars {
+  config_vars = {
     FOO = "bar"
   }
 }`, spaceName, org, appName, org)
@@ -795,7 +795,7 @@ resource "heroku_app" "foobar" {
     name = "%s"
   }
 
-  config_vars {
+  config_vars = {
     FOO = "bar"
   }
 }`, spaceName, org, appName, org)
@@ -850,7 +850,7 @@ resource "heroku_app" "foobar" {
   name   = "%s"
   region = "us"
   acm = false
-  organization = {
+  organization {
     name = "%s"
   }
 
@@ -870,7 +870,7 @@ resource "heroku_app" "foobar" {
   name   = "%s"
   region = "us"
   acm = false
-  organization = {
+  organization {
     name = "%s"
   }
 

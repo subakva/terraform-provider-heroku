@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform/helper/acctest"
 	"github.com/hashicorp/terraform/helper/resource"
 	"github.com/hashicorp/terraform/terraform"
-	"github.com/heroku/heroku-go/v3"
+	heroku "github.com/heroku/heroku-go/v3"
 )
 
 func TestAccHerokuSlug_Basic(t *testing.T) {
@@ -204,7 +204,7 @@ func testAccCheckHerokuSlugConfig_basic(appName string) string {
 resource "heroku_slug" "foobar" {
     app = "${heroku_app.foobar.name}"
     file_path = "test-fixtures/slug.tgz"
-    process_types = {
+    process_types {
     	test = "echo 'Just a test'"
     	diag = "echo 'Just diagnosis'"
     }
@@ -219,7 +219,7 @@ func testAccCheckHerokuSlugConfig_noFile(appName string) string {
 
 resource "heroku_slug" "foobar" {
     app = "${heroku_app.foobar.name}"
-    process_types = {
+    process_types {
       test = "echo 'Just a test'"
       diag = "echo 'Just diagnosis'"
     }
@@ -238,7 +238,7 @@ resource "heroku_slug" "foobar" {
     file_path = "test-fixtures/slug.tgz"
     commit = "abcde"
     commit_description = "Build for testing"
-    process_types = {
+    process_types {
     	test = "echo 'Just a test'"
     	diag = "echo 'Just diagnosis'"
     }
@@ -256,7 +256,7 @@ resource "heroku_slug" "foobar" {
     app = "${heroku_app.foobar.name}"
     buildpack_provided_description = "Ruby"
     file_path = "test-fixtures/slug.tgz"
-    process_types = {
+    process_types {
       web = "ruby server.rb"
     }
 }`, appName)
@@ -272,7 +272,7 @@ resource "heroku_slug" "foobar" {
     app = "${heroku_app.foobar.name}"
     buildpack_provided_description = "Ruby"
     file_url = "https://github.com/terraform-providers/terraform-provider-heroku/raw/master/heroku/test-fixtures/slug.tgz"
-    process_types = {
+    process_types {
       web = "ruby server.rb"
     }
 }`, appName)
@@ -288,7 +288,7 @@ resource "heroku_slug" "foobar" {
     app = "${heroku_app.foobar.name}"
     buildpack_provided_description = "Ruby"
     file_url = "http://github.com/terraform-providers/terraform-provider-heroku/raw/master/heroku/test-fixtures/slug.tgz"
-    process_types = {
+    process_types {
       web = "ruby server.rb"
     }
 }`, appName)
@@ -316,7 +316,7 @@ resource "heroku_slug" "foobar" {
   app = "${heroku_app.foobar.name}"
   buildpack_provided_description = "Ruby"
   file_path = "test-fixtures/slug.tgz"
-  process_types = {
+  process_types {
     web = "ruby server.rb"
   }
 }`, spaceName, orgName, appName, orgName)

@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform/helper/acctest"
 	"github.com/hashicorp/terraform/helper/resource"
 	"github.com/hashicorp/terraform/terraform"
-	"github.com/heroku/heroku-go/v3"
+	heroku "github.com/heroku/heroku-go/v3"
 )
 
 func TestAccHerokuAddon_Basic(t *testing.T) {
@@ -172,7 +172,7 @@ resource "heroku_app" "foobar" {
 resource "heroku_addon" "foobar" {
     app = "${heroku_app.foobar.name}"
     plan = "deployhooks:http"
-    config {
+    config = {
         url = "http://google.com"
     }
 }`, appName)
