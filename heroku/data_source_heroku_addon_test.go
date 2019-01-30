@@ -60,11 +60,9 @@ resource "heroku_app" "foobar" {
 resource "heroku_addon" "foobar" {
     app = "${heroku_app.foobar.name}"
     plan = "deployhooks:http"
-    config = [
-		{
+    config = {
 			url = "http://google.com"
-		}
-    ]
+	}
 }
 
 data "heroku_addon" "test_data" {
