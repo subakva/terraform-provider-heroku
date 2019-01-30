@@ -34,11 +34,8 @@ func dataSourceHerokuAddon() *schema.Resource {
 			},
 
 			"config_vars": {
-				Type:     schema.TypeList,
+				Type:     schema.TypeMap,
 				Computed: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
 			},
 		},
 	}

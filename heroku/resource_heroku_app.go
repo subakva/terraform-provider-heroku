@@ -8,10 +8,10 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/hashicorp/go-multierror"
+	multierror "github.com/hashicorp/go-multierror"
 	"github.com/hashicorp/terraform/helper/resource"
 	"github.com/hashicorp/terraform/helper/schema"
-	"github.com/heroku/heroku-go/v3"
+	heroku "github.com/heroku/heroku-go/v3"
 )
 
 // herokuApplication is a value type used to hold the details of an
@@ -158,20 +158,17 @@ func resourceHerokuApp() *schema.Resource {
 			},
 
 			"config_vars": {
-				Type:     schema.TypeList,
+				Type:     schema.TypeMap,
 				Optional: true,
 				Computed: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeMap,
-				},
 			},
 
 			"sensitive_config_vars": {
-				Type:     schema.TypeList,
+				Type:     schema.TypeMap,
 				Optional: true,
 				Computed: true,
 				Elem: &schema.Schema{
-					Type:      schema.TypeMap,
+					Type:      schema.TypeString,
 					Sensitive: true,
 				},
 			},

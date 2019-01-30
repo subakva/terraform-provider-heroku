@@ -688,7 +688,7 @@ resource "heroku_app" "foobar" {
   region = "us"
 
   config_vars = {
-    FOO = "bar"
+      FOO = "bar"
   }
 }`, appName, appStack)
 }
@@ -735,8 +735,6 @@ func testAccCheckHerokuAppConfig_no_vars(appName string) string {
 resource "heroku_app" "foobar" {
   name   = "%s"
   region = "us"
-
-  config_vars = []
 }`, appName)
 }
 
@@ -806,9 +804,6 @@ func testAccCheckHerokuAppConfig_EmptyConfigVars(appName string) string {
 resource "heroku_app" "foobar" {
   name   = "%s"
   region = "us"
-
-  config_vars = [
-  ]
 }`, appName)
 }
 

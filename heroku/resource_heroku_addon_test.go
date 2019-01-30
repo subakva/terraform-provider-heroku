@@ -174,7 +174,7 @@ resource "heroku_addon" "foobar" {
     plan = "deployhooks:http"
     config = {
         url = "http://google.com"
-    }
+	}
 }`, appName)
 }
 

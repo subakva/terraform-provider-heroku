@@ -95,12 +95,9 @@ func resourceHerokuSlug() *schema.Resource {
 			},
 
 			"process_types": {
-				Type:     schema.TypeSet,
+				Type:     schema.TypeMap,
 				Required: true,
 				ForceNew: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeMap,
-				},
 			},
 
 			"size": {

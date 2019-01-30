@@ -11,7 +11,7 @@ import (
 
 	"github.com/hashicorp/terraform/helper/resource"
 	"github.com/hashicorp/terraform/helper/schema"
-	"github.com/heroku/heroku-go/v3"
+	heroku "github.com/heroku/heroku-go/v3"
 )
 
 // Global lock to prevent parallelism for heroku_addon since
@@ -47,12 +47,9 @@ func resourceHerokuAddon() *schema.Resource {
 			},
 
 			"config": {
-				Type:     schema.TypeList,
+				Type:     schema.TypeMap,
 				Optional: true,
 				ForceNew: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeMap,
-				},
 			},
 
 			"provider_id": {
@@ -66,11 +63,8 @@ func resourceHerokuAddon() *schema.Resource {
 			},
 
 			"config_vars": {
-				Type:     schema.TypeList,
+				Type:     schema.TypeMap,
 				Computed: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
 			},
 		},
 	}
