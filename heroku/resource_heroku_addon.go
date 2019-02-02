@@ -11,7 +11,7 @@ import (
 
 	"github.com/hashicorp/terraform/helper/resource"
 	"github.com/hashicorp/terraform/helper/schema"
-	"github.com/heroku/heroku-go/v3"
+	heroku "github.com/heroku/heroku-go/v3"
 )
 
 // Global lock to prevent parallelism for heroku_addon since
@@ -44,6 +44,11 @@ func resourceHerokuAddon() *schema.Resource {
 			"plan": {
 				Type:     schema.TypeString,
 				Required: true,
+			},
+
+			"as": {
+				Type:     schema.TypeString,
+				Optional: true,
 			},
 
 			"config": {
@@ -86,6 +91,15 @@ func resourceHerokuAddonCreate(d *schema.ResourceData, meta interface{}) error {
 	opts := heroku.AddOnCreateOpts{
 		Plan:    d.Get("plan").(string),
 		Confirm: &app,
+	}
+
+	if v, ok := d.GetOk("as"); ok {
+		as := v.(string)
+		opts.Attachment = &struct {
+			Name *string `json:"name,omitempty" url:"name,omitempty,key"`
+		}{
+			Name: &as,
+		}
 	}
 
 	if v := d.Get("config"); v != nil {
